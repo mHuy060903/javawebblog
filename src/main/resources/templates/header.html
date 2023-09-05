@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -33,6 +34,7 @@
                     <li class="nav-item @@contact__active">
                         <a class="nav-link" th:href="@{/contact}">Contact</a>
                     </li>
+
                 </ul>
 
                 <!--/search-right-->
@@ -63,11 +65,21 @@
                                 <i class="gg-sun"></i>
                                 <i class="gg-moon"></i>
                             </div>
+
                         </label>
                     </div>
                 </nav>
             </div>
             <!-- //toggle switch for light and dark theme -->
+            <li class="nav-item @@contact__active" sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="nav-link">LogIn</a>
+            </li>
+            <li class="nav-item @@contact__active" sec:authorize="isAuthenticated()">
+                <a th:href="@{/dashboard}" class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item @@contact__active" sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" class="nav-link">Logout</a>
+            </li>
         </nav>
     </div>
 </header>
