@@ -12016,3 +12016,10 @@ a.author-name {
     align-items: center;
     gap: 10px;
 }
+
+.form-logout {
+color: #ff8763;
+background-color: transparent;
+font-size: 16px;
+border: none;
+}

@@ -71,15 +71,15 @@
                 </nav>
             </div>
             <!-- //toggle switch for light and dark theme -->
-            <li class="nav-item @@contact__active" sec:authorize="isAnonymous()">
+            <li class="nav-item" sec:authorize="isAnonymous()">
                 <a th:href="@{/login}" class="nav-link">LogIn</a>
             </li>
-            <li class="nav-item @@contact__active" sec:authorize="isAuthenticated()">
+            <li class="nav-item"  sec:authorize="hasRole('ROLE_ADMIN')">
                 <a th:href="@{/dashboard}" class="nav-link">Dashboard</a>
             </li>
-            <li class="nav-item @@contact__active" sec:authorize="isAuthenticated()">
-                <a th:href="@{/logout}" class="nav-link">Logout</a>
-            </li>
+            <form  action="#" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
+                <input class="form-logout" type="submit" value="Logout"/>
+            </form>
         </nav>
     </div>
 </header>

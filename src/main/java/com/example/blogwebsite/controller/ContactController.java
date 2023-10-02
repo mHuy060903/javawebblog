@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ContactController {
     @RequestMapping("/contact")
     public String displayContactPage() {
-        return "contact.html";
+        return "user/contact.html";
     }
 }
