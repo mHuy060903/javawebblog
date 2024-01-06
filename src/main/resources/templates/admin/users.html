@@ -51,13 +51,17 @@ Author URL: http://w3layouts.com
                 <h2 style="text-align: center; font-weight: 700" class="text-primary">Manage Users</h2>
             </div>
 
+            <div class="alert alert-success" style="text-align: center" role="alert" th:if="${param.create != null}">
+                <p class="text-success">Create  success</p>
+            </div>
             <table class="table table-striped">
                 <thead class="table-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Created Time</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
@@ -67,6 +71,7 @@ Author URL: http://w3layouts.com
                     <td th:text="${user.name}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.createdAt}"></td>
+                    <td th:text="${user.roles.roleName}"></td>
                     <td th:if="${user.id != userId}"><a th:href="@{/admin/deleteUser(id=${user.id})}" class="btn btn-danger">DELETE</a></td>
                 </tr>
                 </tbody>

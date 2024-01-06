@@ -31,4 +31,17 @@ public class UserService {
         }
         return isSaved;
     }
+
+    public boolean createNewAdmin(User user) {
+        boolean isSaved = false;
+        Roles role = roleReponsitory.getByRoleName("ADMIN");
+        user.setRoles(role);
+        user.setPwd(passwordEncoder.encode(user.getPwd()));
+        user = userReponsitory.save(user);
+        if(null != user && user.getId() > 0) {
+            isSaved = true;
+        }
+        return isSaved;
+    }
+
 }

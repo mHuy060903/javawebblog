@@ -41,46 +41,30 @@ Author URL: http://w3layouts.com
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb my-breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{/dashboard}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                    <li class="breadcrumb-item active" aria-current="page">Categories</li>
                 </ol>
             </nav>
 
             <div>
-                <h2 style="text-align: center; font-weight: 700" class="text-primary">Add User</h2>
+                <h2 style="text-align: center; font-weight: 700" class="text-primary" th:text="${action}"></h2>
             </div>
 
             <div class="card card_border py-2 mb-4">
                 <div class="card-body">
-                    <form th:action="@{/admin/adduser}" method="post" th:object="${user}">
+                    <form th:action="@{/admin/addcate}" method="post" th:object="${category}">
+                        <input type="hidden" th:field="*{cateId}" >
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label class="input__label">Email</label>
-                                <input type="email" class="form-control input-style" th:field="*{email}"
+                                <label class="input__label">Name</label>
+                                <input type="text" class="form-control input-style" th:field="*{cateName}"
                                        placeholder="Email">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Name</label>
-                                <input type="text" class="form-control input-style" th:field="*{name}"
-                                       placeholder="eg:Huy">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="input__label">Password</label>
-                            <input type="password" class="form-control input-style" th:field="*{pwd}"
-                                  >
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Roles</label>
-                                <select  class="form-control input-style" th:field="*{roles}">
-                                    <option selected value="2">User</option>
-                                    <option value="1">Admin</option>
-                                </select>
-                            </div>
 
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-style mt-4">Add User</button>
+                            <ul>
+                                <li class="alert alert-danger" role="alert" th:each="error : ${#fields.errors('category.*')}" th:text="${error}" />
+                            </ul>
+                        <button type="submit" class="btn btn-primary btn-style mt-4">Add Category</button>
                     </form>
                 </div>
             </div>

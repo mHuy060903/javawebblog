@@ -41,46 +41,52 @@ Author URL: http://w3layouts.com
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb my-breadcrumb">
                     <li class="breadcrumb-item"><a th:href="@{/dashboard}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Users</li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Post</li>
                 </ol>
             </nav>
 
             <div>
-                <h2 style="text-align: center; font-weight: 700" class="text-primary">Add User</h2>
+                <h2 style="text-align: center; font-weight: 700" class="text-primary" th:text="${action}"></h2>
             </div>
 
             <div class="card card_border py-2 mb-4">
                 <div class="card-body">
-                    <form th:action="@{/admin/adduser}" method="post" th:object="${user}">
+                    <form th:action="@{/admin/addpost}" method="post" th:object="${post}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{postId}" >
+
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="input__label">Email</label>
-                                <input type="email" class="form-control input-style" th:field="*{email}"
-                                       placeholder="Email">
+                            <div class="form-group col-md-12">
+                                <label class="input__label">Title</label>
+                                <input type="text" class="form-control input-style" th:field="*{title}"
+                                       placeholder="Title">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Name</label>
-                                <input type="text" class="form-control input-style" th:field="*{name}"
-                                       placeholder="eg:Huy">
+                            <div class="form-group col-md-12">
+                                <label class="input__label">Sub Title</label>
+                                <input type="text" class="form-control input-style" th:field="*{subTitle}"
+                                       placeholder="Sub Title">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="input__label">Password</label>
-                            <input type="password" class="form-control input-style" th:field="*{pwd}"
-                                  >
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Roles</label>
-                                <select  class="form-control input-style" th:field="*{roles}">
-                                    <option selected value="2">User</option>
-                                    <option value="1">Admin</option>
+                            <div class="form-group col-md-12">
+                                <label class="input__label">Image</label>
+                                <input type="file" class="form-control input-style"  name="file"
+                                       aria-describedby="inputGroupFileAddon04"   >
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label  class="input__label">Category</label>
+                                <select  class="form-control input-style"  th:field="*{category}">
+                                    <option th:each="cate: ${catelist}" th:value="${cate.cateId}" th:text="${cate.cateName}"></option>
+
                                 </select>
                             </div>
 
-                        </div>
+                            <div class="form-group col-md-12">
+                                <label  class="input__label">Content</label>
+                                <textarea type="text" class="form-control input-style" th:field="*{content}"
+                                       placeholder="Content"/>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary btn-style mt-4">Add User</button>
+
+                            <button type="submit" class="btn btn-primary btn-style mt-4">Add Post</button>
                     </form>
                 </div>
             </div>

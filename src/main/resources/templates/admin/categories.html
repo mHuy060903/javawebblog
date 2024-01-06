@@ -44,46 +44,36 @@ Author URL: http://w3layouts.com
                     <li class="breadcrumb-item active" aria-current="page">Users</li>
                 </ol>
             </nav>
-
+            <div class="welcome-msg pt-3 pb-4">
+                <a class="btn btn-primary" th:href="@{/admin/categories/add}">Add Category</a>
+            </div>
             <div>
-                <h2 style="text-align: center; font-weight: 700" class="text-primary">Add User</h2>
+                <h2 style="text-align: center; font-weight: 700" class="text-primary">Manage Categories</h2>
             </div>
-
-            <div class="card card_border py-2 mb-4">
-                <div class="card-body">
-                    <form th:action="@{/admin/adduser}" method="post" th:object="${user}">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label class="input__label">Email</label>
-                                <input type="email" class="form-control input-style" th:field="*{email}"
-                                       placeholder="Email">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Name</label>
-                                <input type="text" class="form-control input-style" th:field="*{name}"
-                                       placeholder="eg:Huy">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="input__label">Password</label>
-                            <input type="password" class="form-control input-style" th:field="*{pwd}"
-                                  >
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label  class="input__label">Roles</label>
-                                <select  class="form-control input-style" th:field="*{roles}">
-                                    <option selected value="2">User</option>
-                                    <option value="1">Admin</option>
-                                </select>
-                            </div>
-
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-style mt-4">Add User</button>
-                    </form>
-                </div>
+            <div class="alert alert-success" style="text-align: center" role="alert" th:if="${param.delete != null}">
+                <p class="text-success">Delete category success</p>
             </div>
+            <div class="alert alert-success" style="text-align: center" role="alert" th:if="${param.create != null}">
+                <p class="text-success">Create category success</p>
+            </div>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th width="15%" scope="col">Update</th>
+                    <th width="15%" scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cate: ${categories}">
+                    <td th:text="${cate.cateId}"></td>
+                    <td th:text="${cate.cateName}"></td>
+                    <td><a th:href="@{/admin/updateCate(id=${cate.cateId})}" class="btn btn-primary">UPDATE <i class="fa fa-edit"></i></a></td>
+                    <td><a th:href="@{/admin/deleteCate(id=${cate.cateId})}" class="btn btn-danger">DELETE <i class="fa fa-trash"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
 
 
 
